@@ -14,10 +14,14 @@ class TestTextNode(unittest.TestCase):
         self.assertNotEqual(node, node2)
 
     def test_link_eq(self):
-
         node = TextNode("This is a text node", TextType.LINK, "https:/www.boot.dev/")
         node2 = TextNode("This is a text node", TextType.LINK, "https:/www.boot.dev/")
         self.assertEqual(node, node2)
+
+    def test_image_eq(self):
+        node = TextNode("This is alt for image", TextType.IMAGE, "path/to/image")
+        node2 = TextNode("This is alt for image", TextType.IMAGE, "path/to/image2")
+        self.assertNotEqual(node, node2)
 
 
 if __name__ == "__main__":
