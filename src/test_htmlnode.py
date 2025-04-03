@@ -23,6 +23,10 @@ class TestLeafNode(unittest.TestCase):
         node = LeafNode("a", "This is a link", { "href": "https://www.boot.dev", "target": "_blank" })
         self.assertEqual(node.to_html(), "<a href=\"https://www.boot.dev\" target=\"_blank\">This is a link</a>")
 
+    def test_leaf_to_html_img(self):
+        node = LeafNode("img", "", {"src": "path/to/img", "alt": "sunshine"})
+        self.assertEqual(node.to_html(), "<img src=\"path/to/img\" alt=\"sunshine\" />")
+
     def test_no_value(self):
         with self.assertRaises(ValueError):
             LeafNode("p", None).to_html()

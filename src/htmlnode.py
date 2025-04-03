@@ -35,6 +35,10 @@ class LeafNode(HTMLNode):
         props_string = super().props_to_html()
         if props_string == "":
             return f"<{self.tag}>{self.value}</{self.tag}>"
+        # img tag has value as empty string ("")
+        # we are not going to use it here.
+        if self.tag == "img":
+            return f"<{self.tag} {props_string} />"
         return f"<{self.tag} {props_string}>{self.value}</{self.tag}>"
 
 class ParentNode(HTMLNode):
