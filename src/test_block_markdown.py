@@ -1,5 +1,9 @@
 import unittest
-from block_markdown import markdown_to_blocks
+from block_markdown import (
+    markdown_to_blocks,
+    block_to_block_type,
+    BlockType
+)
 
 
 class TestMarkdownToHTML(unittest.TestCase):
@@ -46,6 +50,55 @@ This is the same paragraph on a new line
             ],
         )
 
+class TestBlockToBlockType(unittest.TestCase):
+    def test_heading_block(self):
+        block = "# this is h1 heading"
+        block_type = block_to_block_type(block)
+        self.assertEqual(
+            block_type,
+            BlockType.HEADING
+        )
+
+    def test_code_block(self):
+        block = "```this is code block heading```"
+        block_type = block_to_block_type(block)
+        self.assertEqual(
+            block_type,
+            BlockType.CODE
+        )
+
+    def test_quote_block(self):
+        block = ">this is code block heading"
+        block_type = block_to_block_type(block)
+        self.assertEqual(
+            block_type,
+            BlockType.QUOTE
+        )
+
+    def test_paragraph_block(self):
+        block = "this is code block heading"
+        block_type = block_to_block_type(block)
+        self.assertEqual(
+            block_type,
+            BlockType.PARAGRAPH
+        )
+
+    def test_ordered_block(self):
+        block = "1. this line one 2. this is line two"
+        block_type = block_to_block_type(block)
+        self.assertEqual(
+            block_type,
+            BlockType.ORDERED_LIST
+        )
+
+    def test_unordered_block(self):
+
+        block = "- this line one - this is line two"
+        block_type = block_to_block_type(block)
+        self.assertEqual(
+            block_type,
+            BlockType.UNORDERED_LIST
+        )
 
 if __name__ == "__main__":
     unittest.main()
