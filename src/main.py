@@ -1,5 +1,5 @@
 from textnode import TextNode, TextType
-import os
+import os, sys
 from gencontent import (
     extract_title,
     generate_page,
@@ -9,12 +9,16 @@ from gencontent import (
 from copy_static import copy_static
 
 DIR_PATH_STATIC = "static/"
-DIR_PATH_PUBLIC = "public/"
+DIR_PATH_PUBLIC = "docs/"
 DIR_PATH_CONTENT = "content/"
 TEMPLATE_PATH = "template.html"
 
 
 def main():
+
+    basepath = f"/{sys.argv[1]}"
+    if basepath is None:
+        basepath = "/"
 
     copy_static(DIR_PATH_STATIC, DIR_PATH_PUBLIC)
     print("Generating pages...")
@@ -22,6 +26,7 @@ def main():
         DIR_PATH_CONTENT,
         TEMPLATE_PATH,
         DIR_PATH_PUBLIC,
+        basepath,
     )
 
 if __name__ == "__main__":
