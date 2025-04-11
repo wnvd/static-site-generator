@@ -1,4 +1,5 @@
 from block_markdown import markdown_to_blocks, markdown_to_html_node
+import os
 
 def extract_title(markdown):
     h1_title = markdown_to_blocks(markdown)[0]
@@ -20,6 +21,9 @@ def generate_page(from_path, template_path, dest_path):
     content = template.replace("{{ Title }}", title)
     content = content.replace("{{ Content }}", html)
 
+    dest_dir_path = os.path.dirname(dest_path)
+    if dest_dir_path != "":
+        os.makedirs(dest_dir_path, exist_ok=True)
     dest_file = open(dest_path, 'w', encoding="utf-8")
     dest_file.write(content)
 
