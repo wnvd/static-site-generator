@@ -1,19 +1,28 @@
 from textnode import TextNode, TextType
-from gencontent import extract_title, generate_page
+import os
+from gencontent import (
+    extract_title,
+    generate_page,
+    generate_pages_recursive,
+)
+
 from copy_static import copy_static
 
-def genereate_pages_recursive(dir_path_content, template_path, dest_dir_path):
-    pass
+DIR_PATH_STATIC = "static/"
+DIR_PATH_PUBLIC = "public/"
+DIR_PATH_CONTENT = "content/"
+TEMPLATE_PATH = "template.html"
 
 
 def main():
 
-    copy_static("static/", "public/")
-    generate_page("content/index.md", "template.html", "public/index.html")
-    generate_page("content/blog/glorfindel/index.md", "template.html", "public/blog/glorfindel.html")
-    generate_page("content/blog/tom/index.md", "template.html", "public/blog/tom.html")
-    generate_page("content/blog/majesty/index.md", "template.html", "public/blog/majesty.html")
-    generate_page("content/contact/index.md", "template.html", "public/contact.html")
+    copy_static(DIR_PATH_STATIC, DIR_PATH_PUBLIC)
+    print("Generating pages...")
+    generate_pages_recursive(
+        DIR_PATH_CONTENT,
+        TEMPLATE_PATH,
+        DIR_PATH_PUBLIC,
+    )
 
 if __name__ == "__main__":
     main()
