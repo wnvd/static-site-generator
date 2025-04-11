@@ -1,4 +1,5 @@
 from textnode import TextNode, TextType
+from gencontent import extract_title, generate_page
 import os, shutil
 
 def copy_static(src, dst):
@@ -18,10 +19,8 @@ def copy_static(src, dst):
 
 def main():
 
-    src = "static/"
-    dst = "public/"
-    copy_static(src, dst)
-
+    copy_static("static/", "public/")
+    generate_page("content/index.md", "template.html", "public/index.html")
 
 if __name__ == "__main__":
     main()
