@@ -16,9 +16,9 @@ TEMPLATE_PATH = "template.html"
 
 def main():
 
-    basepath = f"/{sys.argv[1]}"
-    if basepath is None:
-        basepath = "/"
+    basepath = "/"
+    if not sys.argv is None:
+        basepath = basepath + sys.argv[1]
 
     copy_static(DIR_PATH_STATIC, DIR_PATH_PUBLIC)
     print("Generating pages...")
